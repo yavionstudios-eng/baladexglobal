@@ -228,12 +228,12 @@ body{font-family:'Poppins',sans-serif;background:transparent;min-height:100vh;di
           <div class="service-item" id="sv4">Electrical Parts</div>
           <div class="service-item" id="sv5">Body Parts</div>
           <div class="service-item" id="sv6">Filters &amp; Fluids</div>
-          <div class="service-item" id="sv7">Transmission Parts</div>
+          <div class="service-item" id="sv7">2-Wheeler Spare Parts</div>
           <div class="service-item" id="sv8">Lighting &amp; Lamps</div>
           <div class="service-item" id="sv9">Wheels &amp; Tyres</div>
-          <div class="service-item" id="sv10">Cooling Systems</div>
-          <div class="service-item" id="sv11">Exhaust Systems</div>
-          <div class="service-item" id="sv12">Bulk &amp; Export Orders</div>
+          <div class="service-item" id="sv10">3-Wheeler Spare Parts</div>
+          <div class="service-item" id="sv11">Bulk &amp; Export Orders</div>
+          <div class="service-item" id="sv12">Genuine Auto Parts</div>
         </div>
       </div>
     </div>
@@ -271,12 +271,12 @@ body{font-family:'Poppins',sans-serif;background:transparent;min-height:100vh;di
 var p = new URLSearchParams(window.location.search);
 var name   = p.get('name')   || 'Tausif Ahmed';
 var role   = p.get('role')   || 'CEO';
-var mobile = p.get('mobile') || '9737442444';
+var mobile = p.get('mobile') || '+91 9737442444';
 var email  = p.get('email')  || 'info@baladexglobal.com';
 var email2 = p.get('email2') || 'support@baladexglobal.com';
 var addr   = p.get('addr')   || '2501/6, Nagri Building, Sardar Vallabhbhai Patel Road, Astodia, Ahmedabad – 380001';
 var msg    = p.get('msg')    || '';
-var defaultSvcs = ['Engine Parts','Brake Systems','Suspension Parts','Electrical Parts','Body Parts','Filters & Fluids','Transmission Parts','Lighting & Lamps','Wheels & Tyres','Cooling Systems','Exhaust Systems','Bulk & Export Orders'];
+var defaultSvcs = ['Engine Parts','Brake Systems','Suspension Parts','Electrical Parts','Body Parts','Filters & Fluids','2-Wheeler Spare Parts','Lighting & Lamps','Wheels & Tyres','3-Wheeler Spare Parts','Bulk & Export Orders','Genuine Auto Parts'];
 
 document.title = 'Baladex Global — ' + name;
 function setTxt(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
@@ -288,13 +288,14 @@ for(var i=1;i<=12;i++){var sv=p.get('s'+i)||defaultSvcs[i-1];setTxt('sv'+i,sv);}
 if(msg){var msgEl=document.getElementById('c-msg');msgEl.textContent='“'+msg+'”';msgEl.style.display='block';}
 
 var cleanMobile = mobile.replace(/[\s+\-]/g,'');
-document.getElementById('c-mobile-link').href = 'tel:'+cleanMobile;
+var waNumber = cleanMobile.indexOf('91')===0 ? cleanMobile : '91'+cleanMobile;
+document.getElementById('c-mobile-link').href = 'tel:+'+cleanMobile.replace(/^91/,'91');
 document.getElementById('c-email-link').href = 'mailto:'+email;
 document.getElementById('c-email2-link').href = 'mailto:'+email2;
-document.getElementById('btn-call').href = 'tel:'+cleanMobile;
+document.getElementById('btn-call').href = 'tel:+'+cleanMobile.replace(/^91/,'91');
 document.getElementById('btn-dir').href = 'https://maps.google.com/?q='+encodeURIComponent(addr);
 var waMsg = 'Hello! I received the digital visiting card of *'+name+'*, '+role+' at Baladex Global.\n\nI am interested in auto parts. Could you please share more details?';
-document.getElementById('btn-wa').href = 'https://wa.me/91'+cleanMobile.replace(/^91/,'')+'?text='+encodeURIComponent(waMsg);
+document.getElementById('btn-wa').href = 'https://wa.me/'+waNumber+'?text='+encodeURIComponent(waMsg);
 
 function openPopup(){document.getElementById('contactPopup').classList.add('show');}
 function closePopup(){document.getElementById('contactPopup').classList.remove('show');}
@@ -310,7 +311,7 @@ function submitLead(){
   document.getElementById('submit-btn').disabled=true;
   document.getElementById('submit-btn').textContent='Sending...';
   setTimeout(function(){
-    window.open('https://wa.me/91'+cleanMobile.replace(/^91/,'')+'?text='+encodeURIComponent(lmsg),'_blank');
+    window.open('https://wa.me/'+waNumber+'?text='+encodeURIComponent(lmsg),'_blank');
     document.getElementById('popup-form-view').style.display='none';
     document.getElementById('popup-success-view').style.display='block';
   },600);
